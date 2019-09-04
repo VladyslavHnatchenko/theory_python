@@ -1,5 +1,7 @@
 """Logical expressions and operators."""
 
+pattern = "Wow!"
+
 a = True
 print(type(a))
 
