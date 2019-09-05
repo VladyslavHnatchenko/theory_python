@@ -1,26 +1,67 @@
 import functools
 import time
+import requests
 
 
-def slow_down(func):
-    """Sleep 1 second before calling the function."""
-    @functools.wraps(func)
-    def wrapper_slow_down(*args, **kwargs):
-        time.sleep(1)
-        return func(*args, **kwargs)
-    return wrapper_slow_down
 
 
-@slow_down
-def countdown(from_number):
-    if from_number < 1:
-        print("Liftoff!")
-    else:
-        print(from_number)
-        countdown(from_number - 1)
+# ------------------------------------------------------------------- #
+# def benchmark(func):
+#     def wrapper(*args, **kwargs):
+#         start = time.time()
+#         return_value = func(*args, **kwargs)
+#         end = time.time()
+#         print(f"[*] Execution time: {end-start} seconds.")
+#         return return_value
+#     return wrapper
+#
+#
+# @benchmark
+# def fetch_web_page(url):
+#     web_page = requests.get(url)
+#     return web_page.text
+#
+#
+# web_page = fetch_web_page('https://google.com')
+# print(web_page)
 
+# ------------------------------------------------------------------- #
+# def benchmark(func):
+#     def wrapper():
+#         start = time.time()
+#         func()
+#         end = time.time()
+#         print(f'[*] Execution time: {end-start} seconds.')
+#     return wrapper
+#
+#
+# @benchmark
+# def fetch_web_page():
+#     webpage = requests.get("https://google.com")
+#
+#
+# fetch_web_page()
 
-countdown(3)
+# ------------------------------------------------------------------- #
+# def slow_down(func):
+#     """Sleep 1 second before calling the function."""
+#     @functools.wraps(func)
+#     def wrapper_slow_down(*args, **kwargs):
+#         time.sleep(1)
+#         return func(*args, **kwargs)
+#     return wrapper_slow_down
+#
+#
+# @slow_down
+# def countdown(from_number):
+#     if from_number < 1:
+#         print("Liftoff!")
+#     else:
+#         print(from_number)
+#         countdown(from_number - 1)
+#
+#
+# countdown(3)
 
 # ------------------------------------------------------------------- #
 # def debug(func):

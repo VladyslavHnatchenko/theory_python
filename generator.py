@@ -1,36 +1,48 @@
 """Python Generators."""
+from itertools import islice
 
 import requests
 import re
+import os
 
 
-def get_pages(link):
-    links_to_visit = []
-    links_to_visit.append(link)
-
-    while links_to_visit:
-        current_link = links_to_visit.pop(0)
-        page = requests.get(current_link)
-
-        for url in re.findall('<a href="([^"]+)">', str(page.content)):
-            if url[0] == '/':
-                url = current_link + url[1:]
-            pattern = re.compile('https?')
-            if __name__ == '__main__':
-                if pattern.match(url):
-                    links_to_visit.append(url)
-        yield current_link
+def fib():
+    prev, curr = 0, 1
+    while True:
+        yield curr
+        prev, curr = curr, prev + curr
 
 
-webpage = get_pages('https://www.bloomberg.com/markets/economics')
-for result in webpage:
-    print(result)
-
+f = fib()
+d = fib()
+print(list(islice(f, 0, 10)))
+print(list(islice(d, 0, 40)))
 
 # ------------------------------------------------------------------- #
-# import os
+# def get_pages(link):
+#     links_to_visit = []
+#     links_to_visit.append(link)
+#
+#     while links_to_visit:
+#         current_link = links_to_visit.pop(0)
+#         page = requests.get(current_link)
+#
+#         for url in re.findall('<a href="([^"]+)">', str(page.content)):
+#             if url[0] == '/':
+#                 url = current_link + url[1:]
+#             pattern = re.compile('https?')
+#             if __name__ == '__main__':
+#                 if pattern.match(url):
+#                     links_to_visit.append(url)
+#         yield current_link
 #
 #
+# webpage = get_pages('https://www.bloomberg.com/markets/economics')
+# for result in webpage:
+#     print(result)
+
+# ------------------------------------------------------------------- #
+
 # def generate_filenames():
 #     """Generate a sequence of opened files matching a specific extension."""
 #

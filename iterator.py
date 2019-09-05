@@ -1,20 +1,44 @@
 """Python Iterators."""
 
+from itertools import islice
 
-class BoundedRepeater:
-    def __init__(self, value, max_repeats):
-        self.value = value
-        self.max_repeats = max_repeats
-        self.count = 0
+
+class Fib:
+    def __init__(self):
+        self.prev = 0
+        self.curr = 1
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.count >= self.max_repeats:
-            raise StopIteration
-        self.count += 1
-        return self.value
+        value = self.curr
+        self.curr += self.prev
+        self.prev = value
+        return value
+
+
+f = Fib()
+d = Fib()
+print(list(islice(f, 0, 10)))
+print(list(islice(d, 0, 30)))
+
+
+# ------------------------------------------------------------------- #
+# class BoundedRepeater:
+#     def __init__(self, value, max_repeats):
+#         self.value = value
+#         self.max_repeats = max_repeats
+#         self.count = 0
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.count >= self.max_repeats:
+#             raise StopIteration
+#         self.count += 1
+#         return self.value
 
 # ------------------------------------------------------------------- #
 # class Repeater:
