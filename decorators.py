@@ -3,7 +3,115 @@ import time
 import requests
 
 
+def count_calls(func):
+    @functools.wraps(func)
+    def wrapper_count_calls(*args, **kwargs):
+        wrapper_count_calls.num_calls += 1
+        print(f"Call {wrapper_count_calls.num_calls} of {func.__name__!r}")
+        return func(*args, **kwargs)
+    wrapper_count_calls.num_calls = 0
+    return wrapper_count_calls
 
+
+def cache(func):
+    """Keep a cache of previous function calls."""
+    @functools.wraps(func)
+    def wrapper_cache(*args, **kwargs):
+        cache_key = args + tuple(kwargs.items())
+        if cache_key not in wrapper_cache.cache:
+            wrapper_cache.cache[cache_key] = func(*args, **kwargs)
+        return wrapper_cache.cache[cache_key]
+    wrapper_cache.cache = dict()
+    return wrapper_cache
+
+
+@cache
+@count_calls
+def fibonacci(num):
+    if num < 2:
+        return num
+    return fibonacci(num-1) + fibonacci(num-2)
+
+
+print(fibonacci(10), "\n")
+print(fibonacci(8), "\n")
+
+# ------------------------------------------------------------------- #
+# @count_calls
+# def fibonacci(num):
+#     if num < 2:
+#         return num
+#     return fibonacci(num-1) + fibonacci(num-2)
+#
+#
+# print(fibonacci(10), "\n")
+# print(fibonacci.num_calls)
+# ------------------------------------------------------------------- #
+#
+# @count_calls
+# def say_whee():
+#     print("Whee!")
+#
+#
+# say_whee()
+# say_whee()
+# print(say_whee.num_calls)
+# ------------------------------------------------------------------- #
+# def singleton(cls):
+#     """Make a class a Singleton class(only one instance)."""
+#     @functools.wraps(cls)
+#     def wrapper_singleton(*args, **kwargs):
+#         if not wrapper_singleton.instance:
+#             wrapper_singleton.instance = cls(*args, **kwargs)
+#         return wrapper_singleton.instance
+#     wrapper_singleton.instance = None
+#     return wrapper_singleton
+#
+#
+# @singleton
+# class TheOne:
+#     pass
+#
+#
+# first_one = TheOne()
+# another_one = TheOne()
+#
+# print(id(first_one))
+# print(id(another_one))
+#
+# print(first_one is another_one)
+# print(first_one == another_one)
+
+# ------------------------------------------------------------------- #
+# class CountClass:
+#     def __init__(self, func):
+#         functools.update_wrapper(self, func)
+#         self.func = func
+#         self.num_calls = 0
+#
+#     def __call__(self, *args, **kwargs):
+#         self.num_calls += 1
+#         print(f"call {self.num_calls} of {self.func.__name__!r}")
+#         return self.func(*args, **kwargs)
+#
+#
+# @CountClass
+# def say_whee():
+#     print("Whee!")
+#
+#
+# say_whee()
+# say_whee()
+# print(say_whee.num_calls)
+
+# ------------------------------------------------------------------- #
+# class Counter:
+#     def __init__(self, start=0):
+#         self.count = start
+#
+#     def __call__(self):
+#         self.count += 1
+#         print(f"Current count is {self.count}")
 
 # ------------------------------------------------------------------- #
 # def benchmark(func):

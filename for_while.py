@@ -1,20 +1,24 @@
 """Cycles in programming. 'WHILE' and 'FOR'."""
 
-###########################################################
-###########################################################
 
-total = 100
+list_ = [10, 40, 20, 30]
+for element in list_:
+    print(element + 2)
 
-i = 0
-while i < 5:
-    n = int(input())
-    total = total - n
-    i = i + 1
 
-print("Left", total)
+# ------------------------------------------------------------------- #
+# total = 100
+#
+# i = 0
+# while i < 5:
+#     n = int(input())
+#     total = total - n
+#     i = i + 1
+#
+# print("Left", total)
+#
 
-###########################################################
-
+# ------------------------------------------------------------------- #
 # n = input("Enter the integer number: ")
 #
 # while type(n) != int:
