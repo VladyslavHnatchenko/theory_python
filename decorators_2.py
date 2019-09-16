@@ -1,36 +1,58 @@
 """Primer on Python Decorators."""
 
-import random
-from datetime import datetime
+# import time
+# import requests
+#
+#
+# def benchmark(func):
+#     def wrapper():
+#         start = time.time()
+#         func()
+#         end = time.time()
+#         print(f"[**] Execution time: {end-start} seconds.")
+#     return wrapper()
+#
+#
+# @benchmark
+# def fetch_webpage():
+#     webpage = requests.get("https://google.com")
+#
+#
+# fetch_webpage()
 
 
-PLUGINS = dict()
+# def decorator_function(func):
+#     def wrapper():
+#         print('Wrapper function!')
+#         print(f'Wrapped function {func}')
+#         print('Execution wrapped function')
+#         func()
+#         print('Exit from wrapper!')
+#     return wrapper
+#
+#
+# @decorator_function
+# def hello():
+#     print("What's up, man!")
+#
+#
+# hello()
+
+def dec(func):
+    def func_wrapper():
+        print("Before")
+        func()
+        print("After")
+    return func_wrapper
 
 
-def register(func):
-    """Register a function as a plug-in"""
-    PLUGINS[func.__name__] = func
-    return func
+@dec
+def hello():
+    print("Hello world!")
 
 
-@register
-def say_hello(name):
-    return f"Hello {name}"
+hello()
 
-
-@register
-def be_awesome(name):
-    return f"Yo {name}, together we are the awesomest!"
-
-
-def randomly_greet(name):
-    greeter, greeter_func = random.choice(list(PLUGINS.items()))
-    print(f"Using {greeter!r}")
-    return greeter_func(name)
-
-
-print(PLUGINS)
-print(randomly_greet("Alica"))
 # ------------------------------------------------------------------- #
 # def my_decorator(func):
 #     def wrapper():
@@ -46,7 +68,39 @@ print(randomly_greet("Alica"))
 #
 #
 # say_hello()
-
+# ------------------------------------------------------------------- #
+# import random
+# from datetime import datetime
+#
+#
+# PLUGINS = dict()
+#
+#
+# def register(func):
+#     """Register a function as a plug-in"""
+#     PLUGINS[func.__name__] = func
+#     return func
+#
+#
+# @register
+# def say_hello(name):
+#     return f"Hello {name}"
+#
+#
+# @register
+# def be_awesome(name):
+#     return f"Yo {name}, together we are the awesomest!"
+#
+#
+# def randomly_greet(name):
+#     greeter, greeter_func = random.choice(list(PLUGINS.items()))
+#     print(f"Using {greeter!r}")
+#     return greeter_func(name)
+#
+#
+# print(PLUGINS)
+# print(randomly_greet("Alica"))
+# ------------------------------------------------------------------- #
 # ------------------------------------------------------------------- #
 
 # def not_during_the_night(func):

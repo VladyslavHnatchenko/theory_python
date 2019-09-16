@@ -6,6 +6,22 @@ import re
 import os
 
 
+def simple_generator(val):
+    while val > 0:
+        val -= 1
+        yield 1
+
+
+gen_iter = simple_generator(5)
+print(next(gen_iter))
+# print(next(gen_iter))
+# print(next(gen_iter))
+# print(next(gen_iter))
+# print(next(gen_iter))
+# print(next(gen_iter))
+# print(next(gen_iter))
+
+
 def fib():
     prev, curr = 0, 1
     while True:
@@ -14,9 +30,7 @@ def fib():
 
 
 f = fib()
-d = fib()
 print(list(islice(f, 0, 10)))
-print(list(islice(d, 0, 40)))
 
 # ------------------------------------------------------------------- #
 # def get_pages(link):

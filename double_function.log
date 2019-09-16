@@ -1,0 +1,8 @@
+2019-09-16 10:58:34,505 - double_function - INFO - Execute function : double_function
+2019-09-16 10:58:34,505 - double_function - INFO - Result: 4
+2019-09-16 10:59:58,171 - double_function - INFO - Execute function : double_function
+2019-09-16 10:59:58,171 - double_function - INFO - Result: 4
+2019-09-16 13:07:30,829 - double_function - INFO - Execute function : double_function
+2019-09-16 13:07:30,829 - double_function - INFO - Result: None
+2019-09-16 13:07:31,874 - double_function - INFO - Execute function : double_function
+2019-09-16 13:07:31,874 - double_function - INFO - Result: None

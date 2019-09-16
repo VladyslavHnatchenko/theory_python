@@ -1,11 +1,54 @@
 """Python Iterators."""
 
+x = [1, 2, 3]
+y = iter(x)
+z = iter(x)
+# >>> next(y)
+# 1
+# >>> next(y)
+# 2
+# >>>
+# >>> next(y)
+# 3
+# >>> next(y)
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# StopIteration
+# >>> next(z)
+# 1
+# >>> type(x)
+# <class 'list'>
+# >>> type(y)
+# <class 'list_iterator'>
+# >>> type(z)
+# <class 'list_iterator'>
+# ------------------------------------------------------------------- #
 
-a = [10, 20, 30, 40]
-for id, item in enumerate(a):
-    a[id] = item + 5
+# class SimpleIterator:
+#     def __iter__(self):
+#         return self
+#
+#     def __init__(self, limit):
+#         self.limit = limit
+#         self.counter = 0
+#
+#     def __next__(self):
+#         if self.counter < self.limit:
+#             self.counter += 1
+#             return 1
+#         else:
+#             raise StopIteration
+#
+#
+# s_iter2 = SimpleIterator(5)
+# for i in s_iter2:
+#     print(i)
 
-print(a)
+# a = [10, 20, 30, 40]
+# for id, item in enumerate(a):
+#     a[id] = item + 5
+#
+# print(a)
 
 # a = [10, 20, 30, 40]
 # for i in enumerate(a):
